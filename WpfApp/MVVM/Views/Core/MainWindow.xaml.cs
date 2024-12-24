@@ -1,9 +1,9 @@
-﻿using System.Windows;
+﻿namespace WpfApp.MVVM.Views;
 
-namespace WpfApp.MVVM.Views;
-
-public partial class MainWindow : Window {
-	public MainWindow() {
-		InitializeComponent();
-	}
+public partial class MainWindow
+{
+  public MainWindow()
+  {
+    InitializeComponent();
+  }
 }

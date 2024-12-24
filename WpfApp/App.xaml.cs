@@ -36,21 +36,18 @@ public partial class App {
                 // Services creation to allow ViewModels to navigate from one to another
 
                 services.AddTransient<HomeVm>(
-                    s => new HomeVm(s.GetRequiredService<StringStore>(), CreateInformationNavigationService(s))
+                    s => new HomeVm(CreateInformationNavigationService(s))
                 );
 
                 services.AddSingleton(s =>
                     new NavigationService<HomeVm>(s.GetRequiredService<NavigationStore>(), s.GetRequiredService<HomeVm>));
 
                 services.AddTransient(
-                    s => new LoadingSpinnerDemoVm(s.GetRequiredService<StringStore>(), s.GetRequiredService<CloseModalNavigationService>()));
-
-
-                // Nav Bar
-                services.AddTransient(_ => new NavigationBarVm());
+                    s => new LoadingSpinnerDemoVm(s.GetRequiredService<CloseModalNavigationService>()));
 
                 // Creation of the Main Window which can display the User Controls
                 services.AddSingleton<MainVm>();
+
                 services.AddSingleton(s => new MainWindow { DataContext = s.GetRequiredService<MainVm>() });
             }
         ).Build();

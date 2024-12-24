@@ -1,10 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace CustomWPFComponents.Components;
 
-public partial class BindablePasswordBox : UserControl {
+public partial class BindablePasswordBox {
     private bool _isPasswordChanging;
 
     public static readonly DependencyProperty PasswordProperty = DependencyProperty.Register(
@@ -31,13 +30,13 @@ public partial class BindablePasswordBox : UserControl {
 
     private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e) {
         _isPasswordChanging = true;
-        Password = passwordBox.Password;
+        Password = PasswordBox.Password;
         _isPasswordChanging = false;
     }
 
     private void UpdatePassword() {
         if (!_isPasswordChanging) {
-            passwordBox.Password = Password;
+            PasswordBox.Password = Password;
         }
     }
 }

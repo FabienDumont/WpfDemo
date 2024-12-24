@@ -1,15 +1,11 @@
 ﻿using System.Windows.Input;
 using MVVMEssentials.Commands;
 using MVVMEssentials.Services;
-using MVVMEssentials.Stores;
 using MVVMEssentials.ViewModels;
 
-namespace WpfApp.MVVM.ViewModels; 
+namespace WpfApp.MVVM.ViewModels;
 
-public class LoadingSpinnerDemoVm : BaseVm {
-	
-	public ICommand ReturnCommand { get; set; }
-	public LoadingSpinnerDemoVm(StringStore stringStore, INavigationService closeNavigationService) {
-		ReturnCommand = new NavigateCommand(closeNavigationService);
-	}
+public class LoadingSpinnerDemoVm(INavigationService closeNavigationService) : BaseVm
+{
+	public ICommand ReturnCommand { get; } = new NavigateCommand(closeNavigationService);
 }

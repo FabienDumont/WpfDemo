@@ -1,7 +1,6 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:MVVMEssentials"
     xmlns:contentControl="clr-namespace:MVVMEssentials.ContentControls"
     xmlns:controls="clr-namespace:MVVMEssentials.Controls">
     <Style TargetType="{x:Type contentControl:Modal}">

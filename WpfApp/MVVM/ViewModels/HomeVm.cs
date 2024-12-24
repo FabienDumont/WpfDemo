@@ -3,57 +3,51 @@ using System.Data;
 using System.Windows.Input;
 using MVVMEssentials.Commands;
 using MVVMEssentials.Services;
-using MVVMEssentials.Stores;
 using MVVMEssentials.ViewModels;
 
 namespace WpfApp.MVVM.ViewModels;
 
 public class HomeVm : BaseVm
 {
-  private ObservableCollection<WorkstationSelectionViewModel> _workstations = [];
   public ICommand LoadingSpinnerDemoCommand { get; set; }
 
   public ObservableCollection<WorkstationSelectionViewModel> Workstations
   {
-    get => _workstations;
+    get;
     set
     {
-      if (Equals(value, _workstations))
+      if (Equals(value, field))
       {
         return;
       }
 
-      _workstations = value;
+      field = value;
       OnPropertyChanged();
     }
   }
 
-  public DataTable FakeDataSource { get; set; }
+  public DataTable FakeDataSource { get; }
 
-  public HomeVm(StringStore stringStore, INavigationService loadingSpinnerDemoNavigationService)
+  public HomeVm(INavigationService loadingSpinnerDemoNavigationService)
   {
-
-    var collection = new ObservableCollection<WorkstationSelectionViewModel>();
-
-    collection.Add(new WorkstationSelectionViewModel
+    var collection = new ObservableCollection<WorkstationSelectionViewModel>
     {
-      Code = "WS1",
-      Label = "Workstation 1"
-    });
-
-    collection.Add(new WorkstationSelectionViewModel
-    {
-      Code = "WS2",
-      Label = "Workstation 2",
-      IsChecked = true
-    });
+      new()
+      {
+        Code = "WS1",
+        Label = "Workstation 1"
+      },
+      new()
+      {
+        Code = "WS2",
+        Label = "Workstation 2",
+        IsChecked = true
+      }
+    };
 
     Workstations = collection;
 
-    LoadingSpinnerDemoCommand = new RelayCommand(
-      _ => { loadingSpinnerDemoNavigationService.Navigate(); }
-    );
-
+    LoadingSpinnerDemoCommand = new RelayCommand(_ => { loadingSpinnerDemoNavigationService.Navigate(); });
 
     FakeDataSource = new DataTable(("Fake"));
     FakeDataSource.Columns.Add("Code produit");
@@ -74,42 +68,34 @@ public class HomeVm : BaseVm
   /// </summary>
   public class WorkstationSelectionViewModel : BaseVm
   {
-    #region Fields
-
-    private string _code;
-    private string _label;
-    private bool _isChecked;
-
-    #endregion
-
     #region Properties
 
-    public string Code
+    public string? Code
     {
-      get => _code;
+      get;
       set
       {
-        _code = value;
+        field = value;
         OnPropertyChanged();
       }
     }
 
-    public string Label
+    public string? Label
     {
-      get => _label;
+      get;
       set
       {
-        _label = value;
+        field = value;
         OnPropertyChanged();
       }
     }
 
     public bool IsChecked
     {
-      get => _isChecked;
+      get;
       set
       {
-        _isChecked = value;
+        field = value;
         OnPropertyChanged();
       }
     }

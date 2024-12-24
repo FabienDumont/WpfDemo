@@ -1,11 +1,10 @@
-﻿using System.Windows.Controls;
-
-namespace WpfApp.MVVM.Views; 
+﻿namespace WpfApp.MVVM.Views;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class LoadingSpinnerDemoView : UserControl {
+public partial class LoadingSpinnerDemoView
+{
 	public LoadingSpinnerDemoView() {
 		InitializeComponent();
 	}
