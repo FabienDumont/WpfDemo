@@ -3,9 +3,9 @@
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class LoadingSpinnerDemoView
+public partial class SpinnerView
 {
-	public LoadingSpinnerDemoView() {
+	public SpinnerView() {
 		InitializeComponent();
 	}
 }

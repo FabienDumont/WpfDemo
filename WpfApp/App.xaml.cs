@@ -34,16 +34,22 @@ public partial class App {
                 services.AddSingleton<CloseModalNavigationService>();
 
                 // Services creation to allow ViewModels to navigate from one to another
-
                 services.AddTransient<HomeVm>(
-                    s => new HomeVm(CreateInformationNavigationService(s))
+                    s => new HomeVm(s.GetRequiredService<NavigationService<AnotherVm>>(), CreateSpinnerNavigationService(s))
                 );
 
                 services.AddSingleton(s =>
                     new NavigationService<HomeVm>(s.GetRequiredService<NavigationStore>(), s.GetRequiredService<HomeVm>));
 
+                services.AddTransient<AnotherVm>(
+                  s => new AnotherVm(s.GetRequiredService<NavigationService<HomeVm>>())
+                );
+
+                services.AddSingleton(s =>
+                  new NavigationService<AnotherVm>(s.GetRequiredService<NavigationStore>(), s.GetRequiredService<AnotherVm>));
+
                 services.AddTransient(
-                    s => new LoadingSpinnerDemoVm(s.GetRequiredService<CloseModalNavigationService>()));
+                    s => new SpinnerVm(s.GetRequiredService<CloseModalNavigationService>()));
 
                 // Creation of the Main Window which can display the User Controls
                 services.AddSingleton<MainVm>();
@@ -71,9 +77,9 @@ public partial class App {
         base.OnExit(e);
     }
 
-    private static INavigationService CreateInformationNavigationService(IServiceProvider serviceProvider) {
-        return new ModalNavigationService<LoadingSpinnerDemoVm>(
-            serviceProvider.GetRequiredService<ModalNavigationStore>(), serviceProvider.GetRequiredService<LoadingSpinnerDemoVm>
+    private static INavigationService CreateSpinnerNavigationService(IServiceProvider serviceProvider) {
+        return new ModalNavigationService<SpinnerVm>(
+            serviceProvider.GetRequiredService<ModalNavigationStore>(), serviceProvider.GetRequiredService<SpinnerVm>
         );
     }
 

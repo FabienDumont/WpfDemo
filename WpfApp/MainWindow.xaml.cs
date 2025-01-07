@@ -1,4 +1,4 @@
-﻿namespace WpfApp.MVVM.Views;
+﻿namespace WpfApp;
 
 public partial class MainWindow
 {

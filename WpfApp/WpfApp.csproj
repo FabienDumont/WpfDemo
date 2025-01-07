@@ -17,12 +17,17 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="MVVM\Views\LoadingSpinnerDemoView.xaml">
+      <Page Update="MVVM\Views\SpinnerView.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
       <Page Update="MVVM\Views\Standard\MainWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="MainWindow.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>

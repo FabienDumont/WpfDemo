@@ -2,10 +2,11 @@
 
 namespace WpfApp.MVVM.Views;
 
-public partial class HomeView
+public partial class AnotherView : UserControl
 {
-  public HomeView()
+  public AnotherView()
   {
     InitializeComponent();
   }
 }
+
