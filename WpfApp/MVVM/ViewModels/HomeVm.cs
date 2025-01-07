@@ -9,8 +9,8 @@ namespace WpfApp.MVVM.ViewModels;
 
 public class HomeVm : BaseVm
 {
-  public ICommand NavigateModalSpinnerCommand { get; set; }
-  public ICommand NavigateAnotherCommand { get; set; }
+  public ICommand NavigateModalSpinnerCommand { get; }
+  public ICommand NavigateAnotherCommand { get; }
 
   public HomeVm(INavigationService anotherNavigationService, INavigationService spinnerNavigationService)
   {

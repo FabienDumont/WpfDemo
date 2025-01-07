@@ -11,23 +11,26 @@
         Background="#5d5d89"
         Title="Demo" Height="550" Width="800"
         d:DataContext="{d:DesignInstance viewModels1:MainVm}">
-    <Grid>
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type viewModels:HomeVm}">
-                <views:HomeView/>
-            </DataTemplate>
-          <DataTemplate DataType="{x:Type viewModels:AnotherVm}">
-            <views:AnotherView/>
-          </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:SpinnerVm}">
-                <views:SpinnerView/>
-            </DataTemplate>
-        </Grid.Resources>
+  <Grid>
+    <Grid.Resources>
+      <DataTemplate DataType="{x:Type viewModels:HomeVm}">
+        <views:HomeView />
+      </DataTemplate>
+      <DataTemplate DataType="{x:Type viewModels:AnotherVm}">
+        <views:AnotherView />
+      </DataTemplate>
+      <DataTemplate DataType="{x:Type viewModels:SpinnerVm}">
+        <views:SpinnerView />
+      </DataTemplate>
+      <DataTemplate DataType="{x:Type viewModels:InformationVm}">
+        <views:InformationView />
+      </DataTemplate>
+    </Grid.Resources>
 
-        <contentControls:Modal Panel.ZIndex="1" IsOpen="{Binding IsOpen}">
-            <ContentControl Content="{Binding CurrentModalViewModel}" />
-        </contentControls:Modal>
+    <contentControls:Modal Panel.ZIndex="1" IsOpen="{Binding IsOpen}">
+      <ContentControl Content="{Binding CurrentModalViewModel}" />
+    </contentControls:Modal>
 
-        <ContentControl Content="{Binding CurrentViewModel}"/>
-    </Grid>
+    <ContentControl Content="{Binding CurrentViewModel}" />
+  </Grid>
 </Window>
