@@ -1,21 +1,25 @@
 ﻿namespace MVVMEssentials.Stores;
 
-public class StringStore {
-	private string? _currentString;
+public class StringStore
+{
+  private string? _currentString;
 
-	public string? CurrentString {
-		get => _currentString;
-		set {
-			_currentString = value;
-			CurrentStringChanged?.Invoke();
-		}
-	}
+  public string? CurrentString
+  {
+    get => _currentString;
+    set
+    {
+      _currentString = value;
+      CurrentStringChanged?.Invoke();
+    }
+  }
 
-	public bool IsUsed => CurrentString != null;
+  public bool IsUsed => CurrentString != null;
 
-	public event Action? CurrentStringChanged;
+  public event Action? CurrentStringChanged;
 
-	public void StopUsing() {
-		CurrentString = null;
-	}
+  public void StopUsing()
+  {
+    CurrentString = null;
+  }
 }

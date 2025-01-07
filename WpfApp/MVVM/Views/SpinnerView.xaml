@@ -8,27 +8,27 @@
              mc:Ignorable="d"
              Height="300" Width="300"
              d:DataContext="{d:DesignInstance viewModels:SpinnerVm}">
-    <Border Background="#535359">
-        <StackPanel HorizontalAlignment="Center">
+  <Border Background="#535359">
+    <StackPanel HorizontalAlignment="Center">
 
-            <CheckBox
-                x:Name="CbIsLoading"
-                Margin="10"
-                HorizontalAlignment="Center"
-                Content="Is Loading" />
+      <CheckBox
+        x:Name="CbIsLoading"
+        Margin="10"
+        HorizontalAlignment="Center"
+        Content="Is Loading" />
 
-            <controls:LoadingSpinner
-                Margin="0 10 0 0"
-                Cap="Triangle"
-                Diameter="100"
-                IsLoading="{Binding IsChecked, ElementName=CbIsLoading}"
-                Thickness="5"
-                Color="Black" />
+      <controls:LoadingSpinner
+        Margin="0 10 0 0"
+        Cap="Triangle"
+        Diameter="100"
+        IsLoading="{Binding IsChecked, ElementName=CbIsLoading}"
+        Thickness="5"
+        Color="Black" />
 
-            <Button Margin="0 10 0 0"
-                    Content="OK"
-                    Command="{Binding ReturnCommand}" />
-        </StackPanel>
-    </Border>
+      <Button Margin="0 10 0 0"
+              Content="OK"
+              Command="{Binding ReturnCommand}" />
+    </StackPanel>
+  </Border>
 
 </UserControl>

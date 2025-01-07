@@ -3,24 +3,25 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace MVVMEssentials.Converters; 
+namespace MVVMEssentials.Converters;
 
-public class InvertedEmptyEnumerableVisibilityConverter : IValueConverter {
-	public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) {
-		if (value != null) {
-			
-			IEnumerable enumerable = (IEnumerable)value;
-			int count = enumerable.Cast<object?>().Count();
+public class InvertedEmptyEnumerableVisibilityConverter : IValueConverter
+{
+  public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+  {
+    if (value == null)
+    {
+      return Visibility.Visible;
+    }
 
-			if (count > 0) {
-				return Visibility.Collapsed;
-			}
-		}
-		
-		return Visibility.Visible;
-	}
+    var enumerable = (IEnumerable) value;
+    var count = enumerable.Cast<object?>().Count();
 
-	public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) {
-		throw new NotImplementedException();
-	}
+    return count > 0 ? Visibility.Collapsed : Visibility.Visible;
+  }
+
+  public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+  {
+    throw new NotImplementedException();
+  }
 }

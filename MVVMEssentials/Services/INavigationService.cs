@@ -1,5 +1,6 @@
-namespace MVVMEssentials.Services; 
+namespace MVVMEssentials.Services;
 
-public interface INavigationService {
-    void Navigate();
+public interface INavigationService
+{
+  void Navigate();
 }

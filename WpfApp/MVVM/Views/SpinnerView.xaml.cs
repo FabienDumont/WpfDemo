@@ -5,7 +5,8 @@
 /// </summary>
 public partial class SpinnerView
 {
-	public SpinnerView() {
-		InitializeComponent();
-	}
+  public SpinnerView()
+  {
+    InitializeComponent();
+  }
 }

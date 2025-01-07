@@ -5,14 +5,8 @@ using MVVMEssentials.ViewModels;
 
 namespace WpfApp.MVVM.ViewModels;
 
-public class HomeVm : BaseVm
+public class HomeVm(INavigationService anotherNavigationService, INavigationService spinnerNavigationService) : BaseVm
 {
-  public ICommand NavigateModalSpinnerCommand { get; }
-  public ICommand NavigateAnotherCommand { get; }
-
-  public HomeVm(INavigationService anotherNavigationService, INavigationService spinnerNavigationService)
-  {
-    NavigateAnotherCommand = new RelayCommand(_ => { anotherNavigationService.Navigate(); });
-    NavigateModalSpinnerCommand = new RelayCommand(_ => { spinnerNavigationService.Navigate(); });
-  }
+  public ICommand NavigateModalSpinnerCommand { get; } = new RelayCommand(_ => { spinnerNavigationService.Navigate(); });
+  public ICommand NavigateAnotherCommand { get; } = new RelayCommand(_ => { anotherNavigationService.Navigate(); });
 }

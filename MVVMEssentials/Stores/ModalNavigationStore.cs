@@ -21,7 +21,7 @@ public class ModalNavigationStore : INavigationStore {
     public void Close() => CurrentViewModel = null;
 
     private void OnCurrentViewModelChanged() {
-        Action? viewModelChanged = CurrentViewModelChanged;
+        var viewModelChanged = CurrentViewModelChanged;
         viewModelChanged?.Invoke();
     }
 }

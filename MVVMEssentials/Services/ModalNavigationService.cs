@@ -3,17 +3,11 @@ using MVVMEssentials.ViewModels;
 
 namespace MVVMEssentials.Services;
 
-public class ModalNavigationService<TVm> : INavigationService
-    where TVm : BaseVm {
-    private readonly ModalNavigationStore _navigationStore;
-    private readonly Func<TVm> _createViewModel;
-
-    public ModalNavigationService(ModalNavigationStore navigationStore, Func<TVm> createViewModel) {
-        _navigationStore = navigationStore;
-        _createViewModel = createViewModel;
-    }
-
-    public void Navigate() {
-        _navigationStore.CurrentViewModel = _createViewModel();
-    }
+public class ModalNavigationService<TVm>(ModalNavigationStore navigationStore, Func<TVm> createViewModel)
+  : INavigationService where TVm : BaseVm
+{
+  public void Navigate()
+  {
+    navigationStore.CurrentViewModel = createViewModel();
+  }
 }

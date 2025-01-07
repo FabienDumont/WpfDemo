@@ -2,15 +2,17 @@ using System.Windows.Input;
 
 namespace MVVMEssentials.Commands;
 
-public abstract class BaseCommand : ICommand {
-    public event EventHandler? CanExecuteChanged;
+public abstract class BaseCommand : ICommand
+{
+  public event EventHandler? CanExecuteChanged;
 
-    public virtual bool CanExecute(object? parameter) => true;
+  public virtual bool CanExecute(object? parameter) => true;
 
-    public abstract void Execute(object? parameter);
+  public abstract void Execute(object? parameter);
 
-    protected void OnCanExecuteChanged() {
-        EventHandler? canExecuteChanged = CanExecuteChanged;
-        canExecuteChanged?.Invoke(this, EventArgs.Empty);
-    }
+  protected void OnCanExecuteChanged()
+  {
+    var canExecuteChanged = CanExecuteChanged;
+    canExecuteChanged?.Invoke(this, EventArgs.Empty);
+  }
 }
