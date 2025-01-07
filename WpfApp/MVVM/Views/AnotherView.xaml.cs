@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
+﻿namespace WpfApp.MVVM.Views;
 
-namespace WpfApp.MVVM.Views;
-
-public partial class AnotherView : UserControl
+public partial class AnotherView
 {
   public AnotherView()
   {

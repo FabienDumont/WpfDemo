@@ -7,7 +7,6 @@ using MVVMEssentials.Services;
 using MVVMEssentials.Stores;
 using MVVMEssentials.ViewModels;
 using WpfApp.MVVM.ViewModels;
-using WpfApp.MVVM.Views;
 
 namespace WpfApp;
 

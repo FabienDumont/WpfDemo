@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Data;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MVVMEssentials.Commands;
 using MVVMEssentials.Services;
 using MVVMEssentials.ViewModels;
