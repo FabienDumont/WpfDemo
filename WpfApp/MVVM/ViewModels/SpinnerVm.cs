@@ -7,5 +7,9 @@ namespace WpfApp.MVVM.ViewModels;
 
 public class SpinnerVm(INavigationService closeNavigationService) : BaseVm
 {
+  #region Commands
+
   public ICommand ReturnCommand { get; } = new NavigateCommand(closeNavigationService);
+
+  #endregion
 }

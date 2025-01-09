@@ -8,7 +8,15 @@ namespace WpfApp.MVVM.ViewModels;
 
 public class InformationVm(StringStore stringStore, INavigationService closeNavigationService) : BaseVm
 {
+  #region Properties
+
   public string? Message { get; } = stringStore.CurrentString;
 
+  #endregion
+
+  #region Commands
+
   public ICommand ReturnCommand { get; } = new NavigateCommand(closeNavigationService);
+
+  #endregion
 }
