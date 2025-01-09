@@ -1,35 +1,45 @@
+﻿using System.Windows.Input;
+
 namespace MVVMEssentials.Commands;
 
-public abstract class BaseAsyncCommand(Action<Exception>? exception = null) : BaseCommand
+public abstract class BaseAsyncCommand : ICommand
 {
+  public event EventHandler? CanExecuteChanged;
+
   private bool _isExecuting;
 
-  private bool IsExecuting
+  protected bool IsExecuting
   {
     get => _isExecuting;
-    set
+    private set
     {
       _isExecuting = value;
       OnCanExecuteChanged();
     }
   }
 
-  public override bool CanExecute(object? parameter) => !IsExecuting && base.CanExecute(parameter);
+  public virtual bool CanExecute(object? parameter) => !IsExecuting;
 
-  public override async void Execute(object? parameter)
+  public async void Execute(object? parameter)
   {
-    IsExecuting = true;
-    try
+    if (CanExecute(parameter))
     {
-      await ExecuteAsync(parameter);
+      IsExecuting = true;
+      try
+      {
+        await ExecuteAsync(parameter);
+      }
+      finally
+      {
+        IsExecuting = false;
+      }
     }
-    catch (Exception ex)
-    {
-      exception?.Invoke(ex);
-    }
-
-    IsExecuting = false;
   }
 
   protected abstract Task ExecuteAsync(object? parameter);
+
+  protected void OnCanExecuteChanged()
+  {
+    CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+  }
 }

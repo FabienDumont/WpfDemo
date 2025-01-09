@@ -15,8 +15,11 @@
     <Button Margin="0 10 0 0"
             Content="Information View"
             Command="{Binding NavigateInformationViewCommand}" />
-    <TextBox Margin="0 20 0 0" Text="{Binding MessageToAdd}" />
+    <Button Margin="0 20 0 0" Content="Load Data" Command="{Binding LoadDataCommand}" />
+    <TextBox Margin="0 10 0 0" Text="{Binding MessageToAdd}" />
     <Button Margin="0 10 0 0" Command="{Binding AddMessageCommand}" Content="Add message"/>
+    <Button Margin="0 10 0 0" Command="{Binding AddSpecificMessageCommand}" CommandParameter="ying" Content="Add ying"/>
+    <Button Margin="0 10 0 0" Command="{Binding AddSpecificMessageCommand}" CommandParameter="yang" Content="Add yang"/>
     <ItemsControl Margin="0 10 0 0" ItemsSource="{Binding Messages}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>

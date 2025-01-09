@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MVVMEssentials.Commands;
 using MVVMEssentials.Services;
@@ -29,7 +31,9 @@ public class AnotherVm : BaseVm
 
   #region Commands
 
-  public ICommand AddMessageCommand { get; }
+  public AsyncRelayCommand LoadDataCommand => new(LoadDataAsync, CanLoadData);
+  public RelayCommand AddMessageCommand => new(AddMessage, CanAddMessage);
+  public RelayCommand<object> AddSpecificMessageCommand => new(AddSpecificMessage, CanAddSpecificMessage);
   public ICommand NavigateHomeViewCommand { get; }
   public ICommand NavigateInformationViewCommand { get; }
 
@@ -41,25 +45,53 @@ public class AnotherVm : BaseVm
     StringStore stringStore, INavigationService homeNavigationService, INavigationService informationNavigationService
   )
   {
-    AddMessageCommand = new RelayCommand(
-      _ =>
-      {
-        if (!string.IsNullOrWhiteSpace(MessageToAdd))
-        {
-          Messages.Add(MessageToAdd);
-          MessageToAdd = string.Empty;
-        }
-      }
-    );
-
-    NavigateHomeViewCommand = new RelayCommand(_ => { homeNavigationService.Navigate(); });
+    NavigateHomeViewCommand = new RelayCommand(homeNavigationService.Navigate);
     NavigateInformationViewCommand = new RelayCommand(
-      _ =>
+      () =>
       {
         stringStore.CurrentString = InformationMessage;
         informationNavigationService.Navigate();
       }
     );
+  }
+
+  #endregion
+
+  #region Methods
+
+  private async Task LoadDataAsync()
+  {
+    await Task.Delay(1000);
+    Console.WriteLine("Data loaded!");
+  }
+
+  private bool CanLoadData() => true;
+
+  private bool CanAddMessage()
+  {
+    return Messages.Count < 10;
+  }
+
+  private void AddMessage()
+  {
+    if (!string.IsNullOrWhiteSpace(MessageToAdd))
+    {
+      Messages.Add(MessageToAdd);
+      MessageToAdd = string.Empty;
+    }
+  }
+
+  private bool CanAddSpecificMessage(object? arg)
+  {
+    return Messages.Count < 10;
+  }
+
+  private void AddSpecificMessage(object? parameter)
+  {
+    if (parameter is string message)
+    {
+      Messages.Add(message);
+    }
   }
 
   #endregion

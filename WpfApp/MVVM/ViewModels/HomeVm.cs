@@ -9,10 +9,8 @@ public class HomeVm(INavigationService anotherNavigationService, INavigationServ
 {
   #region Commands
 
-  public ICommand NavigateModalSpinnerCommand { get; } =
-    new RelayCommand(_ => { spinnerNavigationService.Navigate(); });
-
-  public ICommand NavigateAnotherCommand { get; } = new RelayCommand(_ => { anotherNavigationService.Navigate(); });
+  public ICommand NavigateModalSpinnerCommand { get; } = new RelayCommand(spinnerNavigationService.Navigate);
+  public ICommand NavigateAnotherCommand { get; } = new RelayCommand(anotherNavigationService.Navigate);
 
   #endregion
 }

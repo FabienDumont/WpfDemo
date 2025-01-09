@@ -12,7 +12,6 @@ public abstract class BaseCommand : ICommand
 
   protected void OnCanExecuteChanged()
   {
-    var canExecuteChanged = CanExecuteChanged;
-    canExecuteChanged?.Invoke(this, EventArgs.Empty);
+    CanExecuteChanged?.Invoke(this, EventArgs.Empty);
   }
 }
