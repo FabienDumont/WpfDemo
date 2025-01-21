@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="WpfApp.Presentation.MVVM.Views.InformationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:WpfApp.Presentation.MVVM.ViewModels"
+             mc:Ignorable="d"
+             Background="{StaticResource DarkestColor}"
+             d:DataContext="{d:DesignInstance viewModels:InformationVm}">
+  <StackPanel Margin="20">
+    <TextBlock Text="Information View" HorizontalAlignment="Center" FontSize="22" />
+    <TextBlock Text="{Binding Message}" />
+    <Button Margin="0 10 0 0"
+            Content="OK"
+            Command="{Binding ReturnCommand}" />
+  </StackPanel>
+
+</UserControl>

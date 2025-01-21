@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style TargetType="{x:Type ToolTip}">
+    <Style.Setters>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ToolTip">
+            <Border Background="{StaticResource InputColor}"
+                    Width="200"
+                    CornerRadius="10">
+              <TextBlock Margin="10"
+                         Foreground="White"
+                         FontSize="12"
+                         FontFamily="{StaticResource Font}"
+                         FontWeight="Light"
+                         Cursor="Hand"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         TextWrapping="Wrap"
+                         Text="{TemplateBinding Content}" />
+            </Border>
+
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+
+    </Style.Setters>
+  </Style>
+</ResourceDictionary>

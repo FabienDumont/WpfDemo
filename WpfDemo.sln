@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMEssentials", "MVVMEssentials\MVVMEssentials.csproj", "{70F96956-3413-442B-9996-2463772AC7E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApp\WpfApp.csproj", "{D50B87D6-D39A-4C39-990C-67CA8ADF98DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp.Presentation", "WpfApp.Presentation\WpfApp.Presentation.csproj", "{D50B87D6-D39A-4C39-990C-67CA8ADF98DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
