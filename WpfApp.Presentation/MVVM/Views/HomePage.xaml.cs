@@ -1,8 +1,8 @@
 ﻿namespace WpfApp.Presentation.MVVM.Views;
 
-public partial class AnotherView
+public partial class HomePage
 {
-  public AnotherView()
+  public HomePage()
   {
     InitializeComponent();
   }

@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System.IO;
+using System.Threading;
 using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MVVMEssentials.Services;
-using MVVMEssentials.Stores;
-using MVVMEssentials.ViewModels;
-using WpfApp.Presentation.MVVM.ViewModels;
+using TextRpg.Presentation;
+using WpfApp.Presentation.MVVM.Views;
+using WpfApp.Presentation.Services;
 
 namespace WpfApp.Presentation;
 
@@ -15,100 +15,46 @@ namespace WpfApp.Presentation;
 /// </summary>
 public partial class App
 {
-  private readonly IHost _host;
+  public static IHost Host { get; set; }
 
   public App()
   {
-    _host = Host.CreateDefaultBuilder().ConfigureAppConfiguration(
-      c =>
-      {
-        c.AddJsonFile("appsettings.json");
-        c.AddEnvironmentVariables();
-      }
-    ).ConfigureServices(
-      (_, services) =>
-      {
-        // Store classes to send information through ViewModels
-        services.AddSingleton<NavigationStore>();
-        services.AddSingleton<ModalNavigationStore>();
+    var hostBuilder = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder();
+    hostBuilder.ConfigureHostConfiguration(
+      configuration => configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json")
+    );
 
-        services.AddSingleton<StringStore>();
+    hostBuilder.ConfigureAppConfiguration((context, _) => ConfigureSettings(context.Configuration));
+    hostBuilder.ConfigureServices((_, services) => ConfigureServices(services));
 
-        services.AddSingleton<CloseModalNavigationService>();
-
-        // Register all ViewModels
-        services.AddTransient<HomeVm>(
-          s => new HomeVm(s.GetRequiredService<NavigationService<AnotherVm>>(), CreateSpinnerNavigationService(s))
-        );
-
-        services.AddTransient<AnotherVm>(
-          s => new AnotherVm(
-            s.GetRequiredService<StringStore>(), s.GetRequiredService<NavigationService<HomeVm>>(),
-            CreateInformationNavigationService(s)
-          )
-        );
-
-        services.AddTransient(s => new SpinnerVm(s.GetRequiredService<CloseModalNavigationService>()));
-
-        services.AddTransient(
-          s => new InformationVm(
-            s.GetRequiredService<StringStore>(), s.GetRequiredService<CloseModalNavigationService>()
-          )
-        );
-
-        // Register all navigation services
-
-        services.AddSingleton(
-          s => new NavigationService<HomeVm>(s.GetRequiredService<NavigationStore>(), s.GetRequiredService<HomeVm>)
-        );
-
-        services.AddSingleton(
-          s => new NavigationService<AnotherVm>(
-            s.GetRequiredService<NavigationStore>(), s.GetRequiredService<AnotherVm>
-          )
-        );
-
-        // Creation of the Main Window which can display the User Controls
-        services.AddSingleton<MainVm>();
-
-        services.AddSingleton(s => new MainWindow {DataContext = s.GetRequiredService<MainVm>()});
-      }
-    ).Build();
+    Host = hostBuilder.Build();
   }
 
-  protected override void OnStartup(StartupEventArgs e)
+  private void ConfigureSettings(IConfiguration configuration)
   {
-    _host.Start();
+  }
 
-    var mainNavigationService = _host.Services.GetRequiredService<NavigationService<HomeVm>>();
-    mainNavigationService.Navigate();
+  private void ConfigureServices(IServiceCollection services)
+  {
+    // Adds services
+    services.AddSingleton<MainWindow>();
+    services.AddWpf();
+    services.AddSingleton<IFileDialog, FileDialog>();
+    services.AddSingleton<IDialogService, DialogService>();
+    services.AddSingleton<INavigationService, NavigationService>();
 
-    // Showing the main Window
-    MainWindow = _host.Services.GetRequiredService<MainWindow>();
-    MainWindow.Show();
+    ServiceLocator.SetLocatorProvider(services.BuildServiceProvider());
+  }
 
+  protected override async void OnStartup(StartupEventArgs e)
+  {
+    await Host.StartAsync(CancellationToken.None).ConfigureAwait(true);
     base.OnStartup(e);
   }
 
-  protected override void OnExit(ExitEventArgs e)
+  protected override async void OnExit(ExitEventArgs e)
   {
-    _host.Dispose();
+    await Host.StopAsync(CancellationToken.None).ConfigureAwait(true);
     base.OnExit(e);
-  }
-
-  private static ModalNavigationService<SpinnerVm> CreateSpinnerNavigationService(IServiceProvider serviceProvider)
-  {
-    return new ModalNavigationService<SpinnerVm>(
-      serviceProvider.GetRequiredService<ModalNavigationStore>(), serviceProvider.GetRequiredService<SpinnerVm>
-    );
-  }
-
-  private static ModalNavigationService<InformationVm> CreateInformationNavigationService(
-    IServiceProvider serviceProvider
-  )
-  {
-    return new ModalNavigationService<InformationVm>(
-      serviceProvider.GetRequiredService<ModalNavigationStore>(), serviceProvider.GetRequiredService<InformationVm>
-    );
   }
 }

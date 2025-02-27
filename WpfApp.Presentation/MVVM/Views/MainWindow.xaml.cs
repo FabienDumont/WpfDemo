@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WpfApp.Presentation;
+namespace WpfApp.Presentation.MVVM.Views;
 
 public partial class MainWindow
 {

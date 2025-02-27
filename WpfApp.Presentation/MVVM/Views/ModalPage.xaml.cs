@@ -1,8 +1,8 @@
 ﻿namespace WpfApp.Presentation.MVVM.Views;
 
-public partial class InformationView
+public partial class ModalPage
 {
-  public InformationView()
+  public ModalPage()
   {
     InitializeComponent();
   }

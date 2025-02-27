@@ -2,27 +2,20 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using MVVMEssentials.Commands;
-using MVVMEssentials.Services;
-using MVVMEssentials.Stores;
-using MVVMEssentials.ViewModels;
+using CommunityToolkit.Mvvm.Input;
+using WpfApp.Presentation.Services;
 
 namespace WpfApp.Presentation.MVVM.ViewModels;
 
-public class AnotherVm : BaseVm
+public class AnotherVm(IDialogService dialogService, INavigationService navigationService)
+  : BaseVm(dialogService, navigationService)
 {
   #region Properties
-
-  public string InformationMessage
-  {
-    get;
-    set => Set(ref field, value);
-  } = string.Empty;
 
   public string MessageToAdd
   {
     get;
-    set => Set(ref field, value);
+    set => SetProperty(ref field, value);
   } = string.Empty;
 
   public ObservableCollection<string> Messages { get; } = [];
@@ -34,26 +27,7 @@ public class AnotherVm : BaseVm
   public AsyncRelayCommand LoadDataCommand => new(LoadDataAsync, CanLoadData);
   public RelayCommand AddMessageCommand => new(AddMessage, CanAddMessage);
   public RelayCommand<object> AddSpecificMessageCommand => new(AddSpecificMessage, CanAddSpecificMessage);
-  public ICommand NavigateHomeViewCommand { get; }
-  public ICommand NavigateInformationViewCommand { get; }
-
-  #endregion
-
-  #region Ctors
-
-  public AnotherVm(
-    StringStore stringStore, INavigationService homeNavigationService, INavigationService informationNavigationService
-  )
-  {
-    NavigateHomeViewCommand = new RelayCommand(homeNavigationService.Navigate);
-    NavigateInformationViewCommand = new RelayCommand(
-      () =>
-      {
-        stringStore.CurrentString = InformationMessage;
-        informationNavigationService.Navigate();
-      }
-    );
-  }
+  public ICommand NavigateBackCommand => new RelayCommand(NavigateBack);
 
   #endregion
 
@@ -92,6 +66,11 @@ public class AnotherVm : BaseVm
     {
       Messages.Add(message);
     }
+  }
+
+  private void NavigateBack()
+  {
+    NavigationService.GoBack();
   }
 
   #endregion
