@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using WpfEssentials.Services;
 
 namespace WpfApp.Presentation.Services;
 
-internal static class NavigationPageKeys
+public class ProjectNavigationPageResolver : INavigationPageResolver
 {
-  #region Fields
+  #region Properties
 
   public static readonly IDictionary<string, Uri> Pages = new Dictionary<string, Uri>
   {
@@ -24,4 +25,9 @@ internal static class NavigationPageKeys
   };
 
   #endregion
+
+  public Uri? GetPageUri(string pageKey)
+  {
+    return Pages.TryGetValue(pageKey, out var uri) ? uri : null;
+  }
 }

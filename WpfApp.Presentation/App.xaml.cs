@@ -40,6 +40,7 @@ public partial class App
     // Adds services
     services.AddSingleton<MainWindow>();
     services.AddWpf();
+    services.AddSingleton<INavigationPageResolver, ProjectNavigationPageResolver>();
     services.AddSingleton<IDialogService, DialogService>();
     services.AddSingleton<INavigationService, NavigationService>();
 
