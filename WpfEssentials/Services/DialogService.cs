@@ -1,15 +1,28 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfEssentials;
 using WpfEssentials.Controls;
-using WpfEssentials.Services;
 
-namespace WpfApp.Presentation.Services;
+namespace WpfEssentials.Services;
 
 public class DialogService : IDialogService
 {
+  #region Fields
+
+  private readonly IViewLocator _viewLocator;
+
+  #endregion
+
   #region Methods
+
+  #region Ctors
+
+  public DialogService(IViewLocator viewLocator)
+  {
+    _viewLocator = viewLocator;
+  }
+
+  #endregion
 
   public static bool ShowToast(string message, DialogImage image)
   {
@@ -74,7 +87,7 @@ public class DialogService : IDialogService
 
   public bool? ShowDialog<TViewModel>(TViewModel viewModel) where TViewModel : class
   {
-    var viewType = DialogPageKeys.GetViewType(typeof(TViewModel));
+    var viewType = _viewLocator.GetViewType(typeof(TViewModel));
     if (viewType == null)
     {
       throw new InvalidOperationException($"No registered view for {typeof(TViewModel).Name}");

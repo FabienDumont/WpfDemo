@@ -40,9 +40,9 @@ public partial class App
     // Adds services
     services.AddSingleton<MainWindow>();
     services.AddWpf();
+    services.AddViewModels();
     services.AddSingleton<INavigationPageResolver, ProjectNavigationPageResolver>();
-    services.AddSingleton<IDialogService, DialogService>();
-    services.AddSingleton<INavigationService, NavigationService>();
+    services.AddSingleton<IViewLocator, ProjectViewLocator>();
 
     ServiceLocator.SetLocatorProvider(services.BuildServiceProvider());
   }

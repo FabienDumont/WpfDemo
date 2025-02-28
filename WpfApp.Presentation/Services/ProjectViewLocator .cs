@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using WpfApp.Presentation.ViewModels;
 using WpfApp.Presentation.Views;
+using WpfEssentials.Services;
 
 namespace WpfApp.Presentation.Services;
 
-public static class DialogPageKeys
+public class ProjectViewLocator : IViewLocator
 {
   private static readonly Dictionary<Type, Type> ViewModelToViewMapping = new()
   {
     {typeof(ModalVm), typeof(ModalView)}
   };
 
-  public static Type GetViewType(Type viewModelType)
+  public Type? GetViewType(Type viewModelType)
   {
-    return ViewModelToViewMapping.TryGetValue(viewModelType, out var viewType) ? viewType : null!;
+    return ViewModelToViewMapping.GetValueOrDefault(viewModelType);
   }
 }

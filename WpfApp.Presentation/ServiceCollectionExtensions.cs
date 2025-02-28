@@ -7,7 +7,7 @@ public static class ServiceCollectionExtensions
 {
   #region Methods
 
-  public static IServiceCollection AddWpf(this IServiceCollection services)
+  public static IServiceCollection AddViewModels(this IServiceCollection services)
   {
     services.AddSingleton<MainVm>().AddSingleton<HomeVm>().AddSingleton<AnotherVm>().AddSingleton<ModalVm>();
     return services;
