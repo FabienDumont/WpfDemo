@@ -18,7 +18,8 @@
         mc:Ignorable="d"
         DataContext="{Binding Source={StaticResource Locator}, Path=ModalVm}">
   <Grid>
-    <Rectangle Fill="Black" Opacity="0.4" />
+    <Rectangle Fill="Black"
+               Opacity="0.4" />
 
     <Border Background="{DynamicResource MaterialDesignPaper}"
             Padding="20"
@@ -28,15 +29,19 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center">
       <Border.Effect>
-        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="3" Opacity="0.5" />
+        <DropShadowEffect Color="Black"
+                          BlurRadius="10"
+                          ShadowDepth="3"
+                          Opacity="0.5" />
       </Border.Effect>
 
-      <StackPanel>
-        <TextBlock Text="This is a modal." FontSize="16" FontWeight="Bold"
-                   HorizontalAlignment="Center" Margin="0 0 0 10" />
+      <StackPanel HorizontalAlignment="Center">
+        <TextBlock Margin="0 0 0 10"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Text="This is a modal." />
 
-        <Button Width="80" Height="30" HorizontalAlignment="Center"
-                Content="OK"
+        <Button Content="OK"
                 Command="{Binding CloseCommand}" />
       </StackPanel>
     </Border>
