@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using WpfApp.Presentation.Services;
+using WpfEssentials;
+using WpfEssentials.Services;
 
 namespace WpfApp.Presentation.ViewModels;
 

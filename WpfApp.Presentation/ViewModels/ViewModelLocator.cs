@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using WpfApp.Presentation.Services;
+using WpfEssentials.Services;
 
 namespace WpfApp.Presentation.ViewModels;
 

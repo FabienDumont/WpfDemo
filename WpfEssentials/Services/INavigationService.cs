@@ -1,4 +1,4 @@
-﻿namespace WpfApp.Presentation.Services;
+﻿namespace WpfEssentials.Services;
 
 public interface INavigationService
 {

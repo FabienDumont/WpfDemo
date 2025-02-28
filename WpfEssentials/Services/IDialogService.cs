@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace WpfApp.Presentation.Services;
+namespace WpfEssentials.Services;
 
 public interface IDialogService
 {
@@ -14,7 +14,6 @@ public interface IDialogService
   Task<bool> ShowMessage(string message, string title);
   Task ShowMessageBox(string message);
   bool? ShowDialog<TViewModel>(TViewModel viewModel) where TViewModel : class;
-
 
   #endregion
 }

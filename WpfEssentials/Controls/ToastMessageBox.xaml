@@ -1,4 +1,4 @@
-<Window x:Class="WpfApp.Presentation.Controls.ToastMessageBox"
+<Window x:Class="WpfEssentials.Controls.ToastMessageBox"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Name="View"
@@ -25,4 +25,3 @@
              Text="{Binding ElementName=View, Path=Message, Mode=OneWay}"
              TextWrapping="Wrap" />
 </Window>
-

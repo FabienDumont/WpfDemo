@@ -1,7 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfApp.Presentation.Controls;
+using WpfEssentials;
+using WpfEssentials.Controls;
+using WpfEssentials.Services;
 
 namespace WpfApp.Presentation.Services;
 

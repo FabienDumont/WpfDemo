@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 using MahApps.Metro.Controls;
+using WpfEssentials.Services;
 
 namespace WpfApp.Presentation.Services;
 
@@ -75,7 +76,7 @@ public class NavigationService : INavigationService
       }
       else
       {
-        Frame?.NavigationService.Navigate(NavigationPageKeys.Pages[pageKey], parameter); // Update key
+        Frame?.NavigationService.Navigate(NavigationPageKeys.Pages[pageKey], parameter);
         Parameters[pageKey] = parameter;
       }
 

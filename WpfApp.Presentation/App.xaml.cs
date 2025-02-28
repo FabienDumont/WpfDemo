@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WpfApp.Presentation.Services;
+using WpfEssentials;
+using WpfEssentials.Services;
 using MainWindow = WpfApp.Presentation.Views.MainWindow;
 
 namespace WpfApp.Presentation;
@@ -38,7 +40,6 @@ public partial class App
     // Adds services
     services.AddSingleton<MainWindow>();
     services.AddWpf();
-    services.AddSingleton<IFileDialog, FileDialog>();
     services.AddSingleton<IDialogService, DialogService>();
     services.AddSingleton<INavigationService, NavigationService>();
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using WpfApp.Presentation.Services;
+using WpfEssentials.Services;
 
-namespace WpfApp.Presentation.ViewModels;
+namespace WpfEssentials;
 
 public abstract class BaseVm : ObservableRecipient
 {

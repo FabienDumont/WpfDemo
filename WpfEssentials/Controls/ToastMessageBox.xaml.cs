@@ -5,9 +5,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using MaterialDesignThemes.Wpf;
-using WpfApp.Presentation.Services;
 
-namespace WpfApp.Presentation.Controls;
+namespace WpfEssentials.Controls;
 
 public partial class ToastMessageBox
 {

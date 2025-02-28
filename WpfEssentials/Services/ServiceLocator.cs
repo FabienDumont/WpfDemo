@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WpfApp.Presentation.Services;
+namespace WpfEssentials.Services;
 
 /// <summary>
 ///   Service Locator for MVVM pattern applications.

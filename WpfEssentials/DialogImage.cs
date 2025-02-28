@@ -1,5 +1,4 @@
-namespace WpfApp.Presentation.Services;
-
+namespace WpfEssentials;
 
 public enum DialogImage
 {

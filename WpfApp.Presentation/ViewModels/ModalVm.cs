@@ -2,7 +2,8 @@
 using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-using WpfApp.Presentation.Services;
+using WpfEssentials;
+using WpfEssentials.Services;
 
 namespace WpfApp.Presentation.ViewModels;
 
