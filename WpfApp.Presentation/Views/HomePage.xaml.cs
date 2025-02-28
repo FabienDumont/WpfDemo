@@ -1,4 +1,4 @@
-﻿namespace WpfApp.Presentation.MVVM.Views;
+﻿namespace WpfApp.Presentation.Views;
 
 public partial class HomePage
 {

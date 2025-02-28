@@ -4,9 +4,8 @@ using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TextRpg.Presentation;
-using WpfApp.Presentation.MVVM.Views;
 using WpfApp.Presentation.Services;
+using MainWindow = WpfApp.Presentation.Views.MainWindow;
 
 namespace WpfApp.Presentation;
 
@@ -15,7 +14,7 @@ namespace WpfApp.Presentation;
 /// </summary>
 public partial class App
 {
-  public static IHost Host { get; set; }
+  public static IHost? Host { get; set; }
 
   public App()
   {
@@ -24,13 +23,13 @@ public partial class App
       configuration => configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json")
     );
 
-    hostBuilder.ConfigureAppConfiguration((context, _) => ConfigureSettings(context.Configuration));
+    hostBuilder.ConfigureAppConfiguration((_, _) => ConfigureSettings());
     hostBuilder.ConfigureServices((_, services) => ConfigureServices(services));
 
     Host = hostBuilder.Build();
   }
 
-  private void ConfigureSettings(IConfiguration configuration)
+  private void ConfigureSettings()
   {
   }
 
@@ -48,13 +47,21 @@ public partial class App
 
   protected override async void OnStartup(StartupEventArgs e)
   {
-    await Host.StartAsync(CancellationToken.None).ConfigureAwait(true);
+    if (Host != null)
+    {
+      await Host.StartAsync(CancellationToken.None).ConfigureAwait(true);
+    }
+
     base.OnStartup(e);
   }
 
   protected override async void OnExit(ExitEventArgs e)
   {
-    await Host.StopAsync(CancellationToken.None).ConfigureAwait(true);
+    if (Host != null)
+    {
+      await Host.StopAsync(CancellationToken.None).ConfigureAwait(true);
+    }
+
     base.OnExit(e);
   }
 }

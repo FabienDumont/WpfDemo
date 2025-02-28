@@ -2,9 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 using WpfApp.Presentation.Services;
 
-namespace WpfApp.Presentation.MVVM.ViewModels;
+namespace WpfApp.Presentation.ViewModels;
 
-public class HomeVm(IDialogService dialogService, INavigationService navigationService)
+public class HomeVm(IDialogService dialogService, INavigationService navigationService, ModalVm modalVm)
   : BaseVm(dialogService, navigationService)
 {
   #region Commands
@@ -23,7 +23,7 @@ public class HomeVm(IDialogService dialogService, INavigationService navigationS
 
   private void NavigateModal()
   {
-    NavigationService.NavigateTo("ModalPage");
+    DialogService.ShowDialog(modalVm);
   }
 
   #endregion

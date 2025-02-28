@@ -42,12 +42,12 @@ public class NavigationService : INavigationService
   /// </summary>
   public void GoBack()
   {
-    if (Parameters.ContainsKey(CurrentPageKey))
+    if (CurrentPageKey != null && Parameters.ContainsKey(CurrentPageKey))
     {
       Parameters.Remove(CurrentPageKey);
     }
 
-    Frame.NavigationService.GoBack();
+    Frame?.NavigationService.GoBack();
   }
 
   /// <summary>
@@ -71,11 +71,11 @@ public class NavigationService : INavigationService
     {
       if (parameter == null)
       {
-        Frame.NavigationService.Navigate(NavigationPageKeys.Pages[pageKey]);
+        Frame?.NavigationService.Navigate(NavigationPageKeys.Pages[pageKey]);
       }
       else
       {
-        Frame.NavigationService.Navigate(NavigationPageKeys.Pages[pageKey], parameter); // Update key
+        Frame?.NavigationService.Navigate(NavigationPageKeys.Pages[pageKey], parameter); // Update key
         Parameters[pageKey] = parameter;
       }
 

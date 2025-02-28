@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using WpfApp.Presentation.Services;
 
-namespace WpfApp.Presentation.MVVM.ViewModels;
+namespace WpfApp.Presentation.ViewModels;
 
 public abstract class BaseVm : ObservableRecipient
 {

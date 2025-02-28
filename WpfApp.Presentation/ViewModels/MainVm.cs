@@ -1,8 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using WpfApp.Presentation.MVVM.ViewModels;
 using WpfApp.Presentation.Services;
 
-namespace TextRpg.Presentation.MVVM.ViewModels;
+namespace WpfApp.Presentation.ViewModels;
 
 public sealed partial class MainVm : BaseVm
 {

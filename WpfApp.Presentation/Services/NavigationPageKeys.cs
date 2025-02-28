@@ -11,15 +11,15 @@ internal static class NavigationPageKeys
   {
     {
       "HomePage",
-      new Uri("pack://application:,,,/MVVM/Views/HomePage.xaml", UriKind.Absolute)
+      new Uri("pack://application:,,,/Views/HomePage.xaml", UriKind.Absolute)
     },
     {
       "AnotherPage",
-      new Uri("pack://application:,,,/MVVM/Views/AnotherPage.xaml", UriKind.Absolute)
+      new Uri("pack://application:,,,/Views/AnotherPage.xaml", UriKind.Absolute)
     },
     {
       "ModalPage",
-      new Uri("pack://application:,,,/MVVM/Views/ModalPage.xaml", UriKind.Absolute)
+      new Uri("pack://application:,,,/Views/ModalView.xaml", UriKind.Absolute)
     }
   };
 

@@ -55,13 +55,11 @@ public class DialogService : IDialogService
     await Task.FromResult(ShowToast(message, DialogImage.Information)).ConfigureAwait(false);
   }
 
-  public Task<bool> ShowMessage(
-    string message, string title
-  )
+  public Task<bool> ShowMessage(string message, string title)
   {
     return Task.FromResult(
-      System.Windows.Application.Current.MainWindow != null && MessageBox.Show(
-        System.Windows.Application.Current.MainWindow, message, title, MessageBoxButton.YesNo, MessageBoxImage.Question,
+      Application.Current.MainWindow != null && MessageBox.Show(
+        Application.Current.MainWindow, message, title, MessageBoxButton.YesNo, MessageBoxImage.Question,
         MessageBoxResult.Yes
       ) == MessageBoxResult.Yes
     );
@@ -70,6 +68,26 @@ public class DialogService : IDialogService
   public async Task ShowMessageBox(string message)
   {
     await Task.FromResult(ShowToast(message, DialogImage.Information)).ConfigureAwait(false);
+  }
+
+  public bool? ShowDialog<TViewModel>(TViewModel viewModel) where TViewModel : class
+  {
+    var viewType = DialogPageKeys.GetViewType(typeof(TViewModel));
+    if (viewType == null)
+    {
+      throw new InvalidOperationException($"No registered view for {typeof(TViewModel).Name}");
+    }
+
+    var window = (Window) Activator.CreateInstance(viewType)!;
+    window.DataContext = viewModel;
+
+    if (Application.Current.MainWindow != null)
+    {
+      window.Owner = Application.Current.MainWindow;
+      window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+    }
+
+    return window.ShowDialog();
   }
 
   #endregion

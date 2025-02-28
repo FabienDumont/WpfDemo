@@ -33,10 +33,6 @@ public partial class ToastMessageBox
         messageBox.Tag = PackIconKind.Error;
         messageBox.Background = new SolidColorBrush(Color.FromRgb(199, 69, 69));
       }
-      else if (image == DialogImage.Question)
-      {
-        // TODO : Manage question
-      }
       else if (image == DialogImage.Warning)
       {
         messageBox.Tag = PackIconKind.Warning;
@@ -63,14 +59,14 @@ public partial class ToastMessageBox
   public string Message
   {
     get => (string) GetValue(MessageProperty);
-    set => SetValue(MessageProperty, value);
+    init => SetValue(MessageProperty, value);
   }
 
   #endregion
 
   #region Fields
 
-  private DispatcherTimer _dispatcherTimer = new() {Interval = TimeSpan.FromSeconds(15)};
+  private DispatcherTimer? _dispatcherTimer = new() {Interval = TimeSpan.FromSeconds(15)};
 
   #endregion
 
@@ -98,11 +94,10 @@ public partial class ToastMessageBox
 
   private void ToastMessageBox_OnLoaded(object sender, RoutedEventArgs e)
   {
-    var window = System.Windows.Application.Current.MainWindow;
+    var window = Application.Current.MainWindow;
     if (window != null)
     {
-      var toasts = System.Windows.Application.Current.Windows.OfType<ToastMessageBox>().Where(_ => !Equals(this, _))
-        .ToList();
+      var toasts = Application.Current.Windows.OfType<ToastMessageBox>().Where(_ => !Equals(this, _)).ToList();
 
       var top = toasts.Count == 0 ? 0d : toasts.Max(_ => _.Top);
       var lastToast = toasts.LastOrDefault(_ => _.Top.Equals(top)) ?? toasts.LastOrDefault();
@@ -115,7 +110,12 @@ public partial class ToastMessageBox
       Top = GetHeight(lastToast, top == 0d ? location.Y / scale : top) + 5;
     }
 
-    _dispatcherTimer.Tick += (o, args) =>
+    if (_dispatcherTimer == null)
+    {
+      return;
+    }
+
+    _dispatcherTimer.Tick += (_, _) =>
     {
       _dispatcherTimer.Stop();
       _dispatcherTimer = null;

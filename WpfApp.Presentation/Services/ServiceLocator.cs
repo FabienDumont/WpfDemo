@@ -11,8 +11,8 @@ public class ServiceLocator : IServiceProvider
 {
   #region Fields
 
-  private static ServiceLocator _serviceLocator;
-  private static IServiceProvider _serviceProvider;
+  private static ServiceLocator? _serviceLocator;
+  private static IServiceProvider? _serviceProvider;
   private readonly IServiceProvider _provider;
 
   #endregion
@@ -24,7 +24,7 @@ public class ServiceLocator : IServiceProvider
   /// </summary>
   /// <param name="provider">The provider.</param>
   /// <exception cref="ArgumentNullException">provider</exception>
-  public ServiceLocator([NotNull] IServiceProvider provider)
+  public ServiceLocator([NotNull] IServiceProvider? provider)
   {
     _provider = provider ?? throw new ArgumentNullException(nameof(provider));
   }
@@ -58,7 +58,7 @@ public class ServiceLocator : IServiceProvider
   /// </summary>
   /// <param name="serviceProvider">The service provider.</param>
   /// <exception cref="ArgumentNullException">serviceProvider</exception>
-  public static void SetLocatorProvider([NotNull] IServiceProvider serviceProvider)
+  public static void SetLocatorProvider([NotNull] IServiceProvider? serviceProvider)
   {
     _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
   }
@@ -67,7 +67,7 @@ public class ServiceLocator : IServiceProvider
   ///   Gets the instance.
   /// </summary>
   /// <typeparam name="TService">The type of the service.</typeparam>
-  public TService GetInstance<TService>()
+  public TService? GetInstance<TService>()
   {
     return _provider.GetService<TService>();
   }
@@ -83,7 +83,7 @@ public class ServiceLocator : IServiceProvider
   ///   -or-
   ///   <see langword="null" /> if there is no service object of type <paramref name="serviceType" />.
   /// </returns>
-  public object GetService(Type serviceType)
+  public object? GetService(Type serviceType)
   {
     return _provider.GetService(serviceType);
   }

@@ -13,6 +13,8 @@ public interface IDialogService
   Task ShowMessage(string message);
   Task<bool> ShowMessage(string message, string title);
   Task ShowMessageBox(string message);
+  bool? ShowDialog<TViewModel>(TViewModel viewModel) where TViewModel : class;
+
 
   #endregion
 }

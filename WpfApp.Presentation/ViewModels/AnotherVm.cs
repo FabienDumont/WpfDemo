@@ -5,7 +5,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using WpfApp.Presentation.Services;
 
-namespace WpfApp.Presentation.MVVM.ViewModels;
+namespace WpfApp.Presentation.ViewModels;
 
 public class AnotherVm(IDialogService dialogService, INavigationService navigationService)
   : BaseVm(dialogService, navigationService)

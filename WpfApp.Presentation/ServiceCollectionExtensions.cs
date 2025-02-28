@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using TextRpg.Presentation.MVVM.ViewModels;
-using WpfApp.Presentation.MVVM.ViewModels;
+using WpfApp.Presentation.ViewModels;
 
-namespace TextRpg.Presentation;
+namespace WpfApp.Presentation;
 
 public static class ServiceCollectionExtensions
 {
